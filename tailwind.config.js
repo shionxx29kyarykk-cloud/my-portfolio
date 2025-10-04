@@ -1,28 +1,38 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}" 
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       fontFamily: {
-        zen: ['"Zen Maru Gothic"', 'sans-serif'],
-        onest: ['"Onest"', 'sans-serif'],
+        zen: ['"Zen Maru Gothic"', "sans-serif"],
+        onest: ['"Onest"', "sans-serif"],
       },
-      colors:{
-         gray: {
-            100:'#F7F7F7',
-            200:'#EFEFEF',
-            300:'#DCDCDC',
-            400:'#9B9B9B',
-            500:'#505050'
-         }
+      colors: {
+        gray: {
+          100: "#F7F7F7",
+          200: "#EFEFEF",
+          300: "#DCDCDC",
+          350: "#B2B2B2",
+          400: "#9B9B9B",
+          500: "#505050",
+          550: "#929292",
+          600: "#909EA1",
+        },
+        red: {
+          500: "#DD0306",
+        },
+        yellow: {
+          400: "#D6C000",
+        },
+        brown: {
+          500: "#B5825B",
+        },
       },
       borderWidth: {
-        '2.5': '2.5px',
-      }
+        2.5: "2.5px",
+        3: "3px",
+      },
     },
   },
   plugins: [],
-}
+};

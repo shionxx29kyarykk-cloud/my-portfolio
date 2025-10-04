@@ -4,7 +4,7 @@ import Top from "./pages/top";
 export default function App() {
   return (
     <Layout>
-      <Top/>
+      <Top />
     </Layout>
   );
 }

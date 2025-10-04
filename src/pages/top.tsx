@@ -1,11 +1,24 @@
-import Layout from "../components/Layout";
+import Category from "../components/common/category";
+import NewItem from "../components/common/new-item";
+import PickUp from "../components/common/pick-up";
+import Ranking from "../components/common/rannking";
 
 export default function Top() {
   return (
-    <div className="pt-3 min-h-screen">
+    <>
+      <div className="pt-3 relative w-[95%] mx-auto">
         <img src="public/componets/top.png" alt="トップ画像" />
-      <h1 className="text-3xl font-bold text-blue-700">トップページ</h1>
-      <p className="text-gray-600 mt-4">ようこそ！これはポートフォリオのトップページです。</p>
-    </div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+          <p className="text-white text-2xl mb-2">
+            光と余白を楽しむ、心地よい暮らしを。
+          </p>
+          <div className="border-b-3 border-white w-[80%] mx-auto" />
+        </div>
+      </div>
+      <Category />
+      <PickUp />
+      <NewItem />
+      <Ranking />
+    </>
   );
 }
