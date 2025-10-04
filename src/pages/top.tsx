@@ -1,7 +1,7 @@
-import Category from "../components/common/category";
-import NewItem from "../components/common/new-item";
-import PickUp from "../components/common/pick-up";
-import Ranking from "../components/common/rannking";
+import Category from "../components/top/category";
+import NewItem from "../components/top/new-item";
+import PickUp from "../components/top/pick-up";
+import Ranking from "../components/top/rannking";
 
 export default function Top() {
   return (

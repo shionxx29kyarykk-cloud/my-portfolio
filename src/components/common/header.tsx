@@ -10,7 +10,9 @@ export default function Header() {
     <header className="absolute w-full z-10">
       <div className="max-w-[1244px] h-[40px] mx-auto flex items-center pt-12 justify-between px-20">
         {/* ロゴ */}
-        <div className="text-4xl font-onest font-bold">Lumière</div>
+        <a href="/" className="hover:opacity-90">
+          <div className="text-4xl font-onest font-bold">Lumière</div>
+        </a>
 
         {/* ナビゲーションメニュー */}
         <nav className="flex gap-16 text-base font-bold ">
@@ -36,9 +38,15 @@ export default function Header() {
             </span>
           </div>
           <div className="flex gap-4 text-lg text-white">
-            <IconShoppingCart size={28} />
-            <IconHeart size={28} />
-            <IconUserCircle size={28} />
+            <a href="/about" className="hover:opacity-80">
+              <IconShoppingCart size={28} />
+            </a>
+            <a href="/about" className="hover:opacity-80">
+              <IconHeart size={28} />
+            </a>
+            <a href="/about" className="hover:opacity-80">
+              <IconUserCircle size={28} />
+            </a>
           </div>
         </div>
       </div>
