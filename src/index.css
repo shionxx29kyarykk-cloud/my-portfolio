@@ -1,10 +1,11 @@
 /* index.css */
 @import url("https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@400;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 body {
-  font-family: "Zen Maru Gothic", sans-serif !important;
+  font-family: "Zen Maru Gothic", sans-serif;
 }

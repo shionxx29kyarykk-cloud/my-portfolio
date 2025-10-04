@@ -1,39 +1,39 @@
+import { IconHeart, IconSearch, IconShoppingCart, IconUserCircle } from "@tabler/icons-react";
+
 export default function Header() {
   return (
-    <header className="absolute  w-full bg-white shadow-md">
-      <div className="max-w-[1244px] h-[51px] mx-auto flex items-center justify-between px-4">
+    <header className="absolute  w-full">
+      <div className="max-w-[1244px] h-[40px] mx-auto flex items-center pt-12 justify-between px-20">
         {/* ロゴ */}
-        <div className="text-6xl p-24 font-bold">Lumière</div>
+        <div className="text-4xl font-onest font-bold">Lumière</div>
 
         {/* ナビゲーションメニュー */}
-        <nav className="hidden md:flex gap-8 text-sm font-medium text-gray-700">
-          <a href="#" className="hover:text-black">
+        <nav className="flex gap-16 text-base font-bold ">
+          <a href="#" className="hover:opacity-75">
             商品を探す
           </a>
-          <a href="#" className="hover:text-black">
+          <a href="#" className="hover:opacity-75">
             おすすめコンテンツ
           </a>
         </nav>
 
         {/* 検索 & アイコン */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-6">
           {/* 検索バー */}
           <div className="relative">
             <input
               type="text"
-              placeholder="検索"
-              className="w-40 md:w-64 px-3 py-1 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
+              placeholder="商品を探す"
+              className="w-40 md:w-64 text-base px-3 py-1.5 rounded-full bg-transparent placeholder:font-medium  placeholder-white font-bold  border-2.5 border-white focus:outline-none focus:ring-1 "
             />
-            <span className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500">
-              🔍
+            <span className="absolute right-3 top-1/2 -translate-y-1/2 text-white">
+              <IconSearch/>
             </span>
           </div>
-
-          {/* アイコン（仮） */}
-          <div className="flex gap-2 text-xl">
-            <button>🛒</button>
-            <button>🤍</button>
-            <button>👤</button>
+          <div className="flex gap-4 text-lg text-white">
+            <IconShoppingCart size={28}/>
+            <IconHeart size={28}/>
+            <IconUserCircle size={28}/>
           </div>
         </div>
       </div>
