@@ -15,7 +15,6 @@ export default function SortControls({
   const [open, setOpen] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  // 外クリックでメニューを閉じる
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
