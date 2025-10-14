@@ -1,13 +1,19 @@
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const itemsPerPage = 5;
+const itemsPerPage = 20;
 
 type Item = {
   name: string;
 };
 
-export default function Pagination({ items }: { items: Item[] }) {
+export default function Pagination({
+  items,
+  onRangeChange,
+}: {
+  items: Item[];
+  onRangeChange?: (range: { start: number; end: number }) => void;
+}) {
   const [currentPage, setCurrentPage] = useState(1);
 
   const totalPages = Math.ceil(items.length / itemsPerPage);
@@ -15,17 +21,16 @@ export default function Pagination({ items }: { items: Item[] }) {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentItems = items.slice(startIndex, startIndex + itemsPerPage);
 
+  useEffect(() => {
+    onRangeChange?.({
+      start: startIndex,
+      end: Math.min(startIndex + itemsPerPage, items.length),
+    });
+  }, [startIndex, items.length, onRangeChange]);
+
   return (
     <div>
-      {/* 表示リスト */}
-      <ul className="grid grid-cols-1 gap-4">
-        {currentItems.map((item: { name: string }, index: number) => (
-          <li key={index}>{item.name}</li>
-        ))}
-      </ul>
-
-      {/* ページネーションボタン */}
-      <div className="flex justify-center gap-1 items-center">
+      <div className="flex justify-center gap-1 mt-4 items-center">
         <button
           onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
           disabled={currentPage === 1}

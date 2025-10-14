@@ -1,33 +1,80 @@
-import React from 'react';
+import { IconMenuDeep } from "@tabler/icons-react";
+import React, { useState, useRef, useEffect } from "react";
 
-type SortKey = 'price' | 'name';
-type SortOrder = 'asc' | 'desc';
+type SortKey = "price" | "name" | "none";
 
 interface SortControlsProps {
   sortKey: SortKey;
-  sortOrder: SortOrder;
   onSortKeyChange: (key: SortKey) => void;
-  onSortOrderChange: (order: SortOrder) => void;
 }
 
 export default function SortControls({
   sortKey,
-  sortOrder,
   onSortKeyChange,
-  onSortOrderChange,
 }: SortControlsProps) {
+  const [open, setOpen] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  // 外クリックでメニューを閉じる
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(event.target as Node)
+      ) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleSelect = (key: SortKey) => {
+    onSortKeyChange(key);
+    setOpen(false);
+  };
+
+  const selectedLabel =
+    sortKey === "price"
+      ? "価格順"
+      : sortKey === "name"
+        ? "名前順"
+        : sortKey === "none" && "並び替え";
+
   return (
-    <div className="flex gap-4 items-center mb-4">
-      <select
-        value={sortKey}
-        onChange={(e) => onSortKeyChange(e.target.value as SortKey)}
- className="appearance-none bg-white border-1.5 border-gray-300 px-8 py-2 "
-       >
-        <option hidden value="price">並び替え</option>
-        <option value="name">名前</option>
-        <option value="name">名前</option>
-        <option value="name">名前</option>
-      </select>
+    <div className="relative inline-block text-left" ref={wrapperRef}>
+      <button
+        onClick={() => setOpen(!open)}
+        className="inline-flex items-center w-32 justify-center py-2.5 border border-gray-300 bg-white shadow-sm text-sm font-medium hover:bg-gray-50"
+      >
+        {sortKey === "none" && (
+          <IconMenuDeep size={18} className="mr-1 mt-0.5" />
+        )}
+        {selectedLabel}
+      </button>
+
+      {open && (
+        <ul className="absolute mt-2 w-32 bg-white border border-gray-200 rounded shadow-lg z-10">
+          <li
+            onClick={() => handleSelect("none")}
+            className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm"
+          >
+            指定なし
+          </li>
+          <li
+            onClick={() => handleSelect("price")}
+            className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm"
+          >
+            価格順
+          </li>
+          <li
+            onClick={() => handleSelect("name")}
+            className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-sm"
+          >
+            名前順
+          </li>
+        </ul>
+      )}
     </div>
   );
 }

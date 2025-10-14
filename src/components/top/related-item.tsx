@@ -1,18 +1,8 @@
 import { IconHeart, IconHeartFilled } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import LikeButton from "../common/ui/like-button";
 
-export default function NewItem() {
-  const [likedItems, setLikedItems] = useState<{ [id: number]: boolean }>({});
-  const toggleLike = (e: React.MouseEvent, id: number) => {
-    e.stopPropagation();
-    setLikedItems((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
-  };
-
+export default function RelatedItem() {
   const categories = [
     {
       id: 1,
@@ -41,18 +31,19 @@ export default function NewItem() {
   ];
 
   return (
-    <div className="p-5 pt-7 pb-20  ">
-      <ul className="flex flex-wrap justify-center gap-4 mt-8 relative">
+    <div className="p-5 pt-7 pb-20 w-[80%] mx-auto">
+      <div className="border-b border-gray-300 mt-12" />
+      <ul className="flex flex-wrap justify-center gap-4 mt-10 relative">
         {categories.map((category) => (
           <li key={category.id} className="flex flex-col items-start">
             <a href="/item-detail" className="hover:opacity-90">
               {category.id === 1 ? (
                 <div className="flex items-center relative gap-16">
-                  <p className="font-bold font-onest text-[26px] mb-8">
-                    NEW ITEM
+                  <p className="font-bold font-onest text-[25px] mb-8">
+                    RELATED ITEM
                   </p>
-                  <p className="text-base font-bold mb-8 absolute left-52 w-12">
-                    新商品
+                  <p className="text-base font-bold ml-4 mb-8 absolute left-52 w-16">
+                    関連商品
                   </p>
                 </div>
               ) : (
@@ -64,14 +55,7 @@ export default function NewItem() {
                 className="w-52 mb-4"
               />
               <p className="text-sm font-bold">{category.label}</p>
-              <div className="flex items-center mt-1.5 justify-between ">
-                <p className="text-sm text-gray-500">{category.price}</p>
-                <LikeButton
-                  likedItems={likedItems}
-                  toggleLike={toggleLike}
-                  itemId={category.id}
-                />
-              </div>
+              <p className="text-sm mt-1.5 text-gray-500">{category.price}</p>
             </a>
           </li>
         ))}

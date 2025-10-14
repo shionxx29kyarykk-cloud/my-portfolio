@@ -3,18 +3,16 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import PaginatedList from "../components/common/ui/pagination";
 import SortControls from "../components/common/ui/sort-button";
+import Pagination from "../components/common/ui/pagination";
+import LikeButton from "../components/common/ui/like-button";
 
-const dummyItems = Array.from({ length: 20 }, (_, i) => ({
-  name: ``,
-}));
-
-export default function NewItem() {
+export default function Items() {
   const [likedItems, setLikedItems] = useState<{ [id: number]: boolean }>({});
   const toggleLike = (e: React.MouseEvent, id: number) => {
     e.stopPropagation();
     setLikedItems((prev) => ({
       ...prev,
-      [id]: !prev[id], // 現在の状態を反転
+      [id]: !prev[id],
     }));
   };
 
@@ -91,28 +89,77 @@ export default function NewItem() {
       label: "Lumo（ルモ）チェア",
       price: "¥19,800（税込）",
     },
+    {
+      id: 13,
+      src: "public/componets/common/new-item/NEW.png",
+      label: "Mysa（ミーサ）ウールラグ",
+      price: "¥68,000（税込）",
+    },
+    {
+      id: 14,
+      src: "public/componets/common/new-item/NEW2.png",
+      label: "Sova（ソーヴァ）ベッド",
+      price: "¥124,800（税込）",
+    },
+    {
+      id: 15,
+      src: "public/componets/common/new-item/NEW3.png",
+      label: "Bordet（ボルデット）テーブル",
+      price: "¥22,900（税込）",
+    },
+    {
+      id: 16,
+      src: "public/componets/common/new-item/NEW4.png",
+      label: "Lumo（ルモ）チェア",
+      price: "¥19,800（税込）",
+    },
+    {
+      id: 17,
+      src: "public/componets/common/new-item/NEW.png",
+      label: "Mysa（ミーサ）ウールラグ",
+      price: "¥68,000（税込）",
+    },
+    {
+      id: 18,
+      src: "public/componets/common/new-item/NEW2.png",
+      label: "Sova（ソーヴァ）ベッド",
+      price: "¥124,800（税込）",
+    },
+    {
+      id: 19,
+      src: "public/componets/common/new-item/NEW3.png",
+      label: "Bordet（ボルデット）テーブル",
+      price: "¥22,900（税込）",
+    },
+    {
+      id: 20,
+      src: "public/componets/common/new-item/NEW4.png",
+      label: "Lumo（ルモ）チェア",
+      price: "¥19,800（税込）",
+    },
   ];
 
- const [sortKey, setSortKey] = useState<'price' | 'name'>('price');
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
+  const [sortKey, setSortKey] = useState<"price" | "name" | "none">("none");
+
+  const items = [...Array(65)].map((_, i) => ({ name: "" }));
+  const [visibleRange, setVisibleRange] = useState({ start: 0, end: 0 });
 
   return (
-    <div className="p-5 pt-7 pb-20 w-[80%] mx-auto ">
+    <div className="p-5 pt-7 pb-20 w-[80%] mx-auto">
       <h1 className="font-bold text-[26px] mb-6 text-center mt-5">
         ラグ・カーペット
       </h1>
-      <div>
-      <SortControls
-        sortKey={sortKey}
-        sortOrder={sortOrder}
-        onSortKeyChange={setSortKey}
-        onSortOrderChange={setSortOrder}
-      />
-    </div>
+      <div className="flex items-center justify-between w-[90%] mx-auto">
+        <p className="text-center my-4 fon text-sm text-gray-450">
+          {items.length} 件中
+          {visibleRange.start + 1}〜{visibleRange.end} 件目 表示
+        </p>
+        <SortControls sortKey={sortKey} onSortKeyChange={setSortKey} />
+      </div>
       <ul className="flex flex-wrap justify-center gap-4 relative">
         {categories.map((category) => (
-          <li key={category.id} className="flex flex-col items-start mt-14">
-            <a href="#" className="hover:opacity-90">
+          <li key={category.id} className="flex flex-col items-start mt-8 mb-6">
+            <a href="item-detail" className="hover:opacity-90">
               <img
                 src={category.src}
                 alt={`pick-up ${category.id + 1}`}
@@ -121,33 +168,18 @@ export default function NewItem() {
               <p className="text-sm font-bold">{category.label}</p>
               <div className="flex items-center mt-1.5 justify-between ">
                 <p className="text-sm text-gray-500">{category.price}</p>
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    toggleLike(e, category.id);
-                  }}
-                >
-                  {likedItems[category.id] ? (
-                    <IconHeartFilled
-                      size={26}
-                      stroke={1.5}
-                      className="text-red-500"
-                    />
-                  ) : (
-                    <IconHeart
-                      size={26}
-                      stroke={1.5}
-                      className="text-gray-400"
-                    />
-                  )}
-                </button>
+                <LikeButton
+                  likedItems={likedItems}
+                  toggleLike={toggleLike}
+                  itemId={category.id}
+                />
               </div>
             </a>
           </li>
         ))}
       </ul>
       <div className="p-8">
-        <PaginatedList items={dummyItems} />
+        <Pagination items={items} onRangeChange={setVisibleRange} />
       </div>
     </div>
   );
