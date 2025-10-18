@@ -2,7 +2,15 @@ import { IconHeart, IconHeartFilled } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-export default function RelatedItem() {
+export default function RelatedItem({
+  title = "RELATED ITEM",
+  subTitle = " 関連",
+  padding = "pt-7",
+}: {
+  title?: string;
+  subTitle?: string;
+  padding?: string;
+}) {
   const categories = [
     {
       id: 1,
@@ -31,7 +39,7 @@ export default function RelatedItem() {
   ];
 
   return (
-    <div className="p-5 pt-7 pb-20 w-[80%] mx-auto">
+    <div className={padding + "p-5 pb-20 w-[80%] mx-auto"}>
       <div className="border-b border-gray-300 mt-12" />
       <ul className="flex flex-wrap justify-center gap-4 mt-10 relative">
         {categories.map((category) => (
@@ -40,10 +48,10 @@ export default function RelatedItem() {
               {category.id === 1 ? (
                 <div className="flex items-center relative gap-16">
                   <p className="font-bold font-onest text-[25px] mb-8">
-                    RELATED ITEM
+                    {title}
                   </p>
-                  <p className="text-base font-bold ml-4 mb-8 absolute left-52 w-16">
-                    関連商品
+                  <p className="text-base font-bold ml-4 mb-8 absolute left-52 w-24">
+                    {subTitle}商品
                   </p>
                 </div>
               ) : (

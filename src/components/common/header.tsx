@@ -9,12 +9,10 @@ export default function Header() {
   return (
     <header className="absolute w-full z-10">
       <div className="max-w-[1244px] h-[40px] mx-auto flex items-center pt-12 justify-between px-20">
-        {/* ロゴ */}
         <a href="/" className="hover:opacity-90">
           <div className="text-4xl font-onest font-bold">Lumière</div>
         </a>
 
-        {/* ナビゲーションメニュー */}
         <nav className="flex gap-16 text-base font-bold ">
           <a href="#" className="hover:underline">
             商品を探す
@@ -24,9 +22,7 @@ export default function Header() {
           </a>
         </nav>
 
-        {/* 検索 & アイコン */}
         <div className="flex items-center gap-6">
-          {/* 検索バー */}
           <div className="relative">
             <input
               type="text"
@@ -38,13 +34,13 @@ export default function Header() {
             </span>
           </div>
           <div className="flex gap-4 text-lg text-white">
-            <a href="/about" className="hover:opacity-80">
+            <a href="/cart" className="hover:opacity-80">
               <IconShoppingCart size={28} />
             </a>
-            <a href="/about" className="hover:opacity-80">
+            <a href="/" className="hover:opacity-80">
               <IconHeart size={28} />
             </a>
-            <a href="/about" className="hover:opacity-80">
+            <a href="/" className="hover:opacity-80">
               <IconUserCircle size={28} />
             </a>
           </div>

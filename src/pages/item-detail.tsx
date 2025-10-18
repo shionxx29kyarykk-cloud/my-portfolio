@@ -15,6 +15,7 @@ import NewItem from "../components/top/new-item";
 import Badge from "../components/common/ui/badge";
 import RelatedItem from "../components/top/related-item";
 import PickUp from "../components/top/pick-up";
+import MainButton from "../components/common/ui/main-butto";
 
 const colors = [
   { name: "ブルー", value: "#5CAEC7" },
@@ -30,7 +31,6 @@ export default function ItemDetail() {
   const [likedItems, setLikedItems] = useState<{ [id: number]: boolean }>({});
   const [selectedColor, setSelectedColor] = useState(colors[0].value);
   const [selectedSize, setSelectedSize] = useState(sizes[0].value);
-  const [quantity, setQuantity] = useState(1);
 
   const toggleLike = (e: React.MouseEvent, id: number) => {
     e.stopPropagation();
@@ -49,34 +49,23 @@ export default function ItemDetail() {
     },
     {
       id: 2,
-      src: "public/componets/common/new-item/NEW2.png",
+      src: "public/componets/items/Rectangle 13.png",
       label: "Mysa（ミーサ）ウールラグ",
       price: "¥124,800（税込）",
     },
     {
       id: 3,
-      src: "public/componets/common/new-item/NEW3.png",
+      src: "public/componets/items/Rectangle 14.png",
       label: "Mysa（ミーサ）ウールラグ",
       price: "¥22,900（税込）",
     },
     {
       id: 4,
-      src: "public/componets/common/new-item/NEW4.png",
+      src: "public/componets/common/new-item/NEW.png",
       label: "Mysa（ミーサ）ウールラグ",
       price: "¥19,800（税込）",
     },
   ];
-
-  const handleAddToCart = () => {
-    const cartItem = {
-      productId: product.id,
-      name: product.label,
-      price: product.price,
-      color: selectedColor,
-      size: selectedSize,
-      quantity: quantity,
-    };
-  };
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -92,7 +81,7 @@ export default function ItemDetail() {
 
   return (
     <div className="pt-14 w-full mx-auto">
-      <ul className="flex flex-wrap justify-center gap-10 relative">
+      <ul className="flex flex-wrap justify-center gap-12 relative">
         <li>
           <div className="relative w-[340px] mx-auto mb-4">
             <button
@@ -105,7 +94,7 @@ export default function ItemDetail() {
             <img
               src={product.src}
               alt="商品詳細"
-              className="w-full object-cover"
+              className="w-[500px] object-cover"
             />
 
             <button
@@ -129,7 +118,7 @@ export default function ItemDetail() {
           </div>
         </li>
         <div className="flex justify-between flex-col mb-3 mt-2">
-          <li className="w-72 flex flex-col gap-6">
+          <li className="w-80 flex flex-col gap-6">
             <div className="flex gap-2 flex-col">
               <Badge text={"NEW"} color="red" />
               <h1 className="font-bold text-xl">{product.label}</h1>
@@ -193,12 +182,7 @@ export default function ItemDetail() {
               </div>
             </div>
             <div className="gap-3 flex items-center">
-              <button
-                onClick={handleAddToCart}
-                className="w-full md:w-60 bg-blue-400 hover:opacity-90 text-white py-2.5 text-[1.1rem] px-6 rounded transition"
-              >
-                カートに入れる
-              </button>
+              <MainButton to="/cart">カートに入れる</MainButton>
               <LikeButton
                 likedItems={likedItems}
                 toggleLike={toggleLike}
