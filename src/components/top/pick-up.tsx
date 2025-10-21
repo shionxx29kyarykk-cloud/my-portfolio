@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 export default function PickUp() {
   const categories = [
-    { src: "public/componets/common/pick-up/pick-up1.png" },
-    { src: "public/componets/common/pick-up/pick-up2.png" },
+    { src: "/componets/common/pick-up/pick-up1.png" },
+    { src: "/componets/common/pick-up/pick-up2.png" },
   ];
 
   return (
@@ -11,7 +11,7 @@ export default function PickUp() {
       <ul className="flex flex-wrap justify-center gap-10 mt-8 relative">
         {categories.map((category, index) => (
           <li key={index} className="flex flex-col items-start w-96">
-            <a href="#" className="hover:opacity-90">
+            <a href="/#" className="hover:opacity-90">
               {index === 0 ? (
                 <div className="flex items-center gap-16">
                   <p className="font-bold font-onest text-[26px] mb-6">

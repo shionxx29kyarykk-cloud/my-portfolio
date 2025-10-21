@@ -1,21 +1,14 @@
-import { useState } from "react";
-import {
-  IconChevronLeft,
-  IconChevronRight,
-  IconHeart,
-  IconHeartFilled,
-} from "@tabler/icons-react";
-import { Link } from "react-router-dom";
-import Pagination from "../components/common/ui/pagination";
-import SortControls from "../components/common/ui/sort-button";
+import { useEffect, useState } from "react";
+import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 import SpinButton from "../components/common/ui/spin-button";
 import LikeButton from "../components/common/ui/like-button";
-import Category from "../components/top/category";
-import NewItem from "../components/top/new-item";
-import Badge from "../components/common/ui/badge";
+import Badge from "../components/common/ui/new-badge";
 import RelatedItem from "../components/top/related-item";
 import PickUp from "../components/top/pick-up";
 import MainButton from "../components/common/ui/main-butto";
+import { useNavigate, useParams } from "react-router-dom";
+import { itemLists } from "../assets/data/items";
+import NewBadge from "../components/common/ui/new-badge";
 
 const colors = [
   { name: "ブルー", value: "#5CAEC7" },
@@ -27,7 +20,35 @@ const sizes = [
   { name: "140×200cm", value: "2" },
 ];
 
-export default function ItemDetail() {
+interface CartItem {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+  color: string;
+  size: string;
+  image: string;
+}
+
+interface ItemDetailProps {
+  onAddToCart: (item: CartItem) => void;
+}
+export default function ItemDetail({ onAddToCart }: ItemDetailProps) {
+  const { id } = useParams();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const newIndex = itemLists.findIndex((item) => item.id === Number(id));
+    if (newIndex !== -1) {
+      setCurrentIndex(newIndex);
+    }
+  }, [id]);
+
+  const product = itemLists.find((p) => p.id === Number(id));
+  if (!product) {
+    return <p>商品が見つかりません</p>;
+  }
+
   const [likedItems, setLikedItems] = useState<{ [id: number]: boolean }>({});
   const [selectedColor, setSelectedColor] = useState(colors[0].value);
   const [selectedSize, setSelectedSize] = useState(sizes[0].value);
@@ -40,44 +61,38 @@ export default function ItemDetail() {
     }));
   };
 
-  const categories = [
-    {
-      id: 1,
-      src: "public/componets/common/new-item/NEW.png",
-      label: "Mysa（ミーサ）ウールラグ",
-      price: "¥68,000（税込）",
-    },
-    {
-      id: 2,
-      src: "public/componets/items/Rectangle 13.png",
-      label: "Mysa（ミーサ）ウールラグ",
-      price: "¥124,800（税込）",
-    },
-    {
-      id: 3,
-      src: "public/componets/items/Rectangle 14.png",
-      label: "Mysa（ミーサ）ウールラグ",
-      price: "¥22,900（税込）",
-    },
-    {
-      id: 4,
-      src: "public/componets/common/new-item/NEW.png",
-      label: "Mysa（ミーサ）ウールラグ",
-      price: "¥19,800（税込）",
-    },
-  ];
+  const initialIndex = itemLists.findIndex((item) => item.id === Number(id));
 
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(
+    initialIndex >= 0 ? initialIndex : 0,
+  );
 
   const prev = () => {
-    setCurrentIndex((idx) => (idx === 0 ? categories.length - 1 : idx - 1));
+    setCurrentIndex((idx) => (idx === 0 ? itemLists.length - 1 : idx - 1));
   };
 
   const next = () => {
-    setCurrentIndex((idx) => (idx === categories.length - 1 ? 0 : idx + 1));
+    setCurrentIndex((idx) => (idx === itemLists.length - 1 ? 0 : idx + 1));
   };
 
-  const product = categories[currentIndex];
+  const [quantity, setQuantity] = useState(1);
+
+  const itemList = itemLists[currentIndex];
+
+  const handleAddToCart = () => {
+    const cartItem: CartItem = {
+      id: itemList.id,
+      name: itemList.label,
+      price: itemList.price,
+      quantity: quantity,
+      color: colors.find((c) => c.value === selectedColor)?.name || "ー",
+      size: sizes.find((s) => s.value === selectedSize)?.name || "ー",
+      image: itemList.src,
+    };
+
+    onAddToCart(cartItem);
+    navigate("/cart");
+  };
 
   return (
     <div className="pt-14 w-full mx-auto">
@@ -92,7 +107,7 @@ export default function ItemDetail() {
             </button>
 
             <img
-              src={product.src}
+              src={itemList.src}
               alt="商品詳細"
               className="w-[500px] object-cover"
             />
@@ -105,13 +120,13 @@ export default function ItemDetail() {
             </button>
           </div>
           <div className="flex w-[24.5rem] mx-auto gap-2 justify-center">
-            {categories.slice(0, 4).map((category, index) => (
+            {itemLists.slice(0, 4).map((itemList, index) => (
               <img
                 key={index}
-                src={category.src}
+                src={itemList.src}
                 alt={`サムネイル${index + 1}`}
                 className={`w-1/5 object-cover cursor-pointer transition hover:opacity-90
-      ${currentIndex === index ? "border-2 border-blue-400" : "border"}`}
+                  ${currentIndex === index ? "border-2 border-blue-400" : "border"}`}
                 onClick={() => setCurrentIndex(index)}
               />
             ))}
@@ -120,8 +135,8 @@ export default function ItemDetail() {
         <div className="flex justify-between flex-col mb-3 mt-2">
           <li className="w-80 flex flex-col gap-6">
             <div className="flex gap-2 flex-col">
-              <Badge text={"NEW"} color="red" />
-              <h1 className="font-bold text-xl">{product.label}</h1>
+              {itemList.isNew && <NewBadge text={"NEW"} color="red" />}
+              <h1 className="font-bold text-xl">{itemList.label}</h1>
             </div>
             <div className="flex flex-col gap-2">
               <div className="flex gap-2">
@@ -173,8 +188,8 @@ export default function ItemDetail() {
               <SpinButton
                 min={1}
                 max={10}
-                initial={2}
-                onChange={(val) => console.log("数量:", val)}
+                initial={1}
+                onChange={(val) => setQuantity(val)}
               />
               <div className="flex items-end gap-1.5">
                 <p className="text-[1.4rem] font-bold">¥68,000</p>
@@ -182,11 +197,13 @@ export default function ItemDetail() {
               </div>
             </div>
             <div className="gap-3 flex items-center">
-              <MainButton to="/cart">カートに入れる</MainButton>
+              <MainButton to="/cart" onClick={handleAddToCart}>
+                カートに入れる
+              </MainButton>
               <LikeButton
                 likedItems={likedItems}
                 toggleLike={toggleLike}
-                itemId={product.id}
+                itemId={itemList.id}
                 size={"35"}
               />
             </div>

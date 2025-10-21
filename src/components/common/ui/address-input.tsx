@@ -13,15 +13,18 @@ interface Orderer {
 export default function AddressInput({
   info,
   setInfo,
+  errors,
 }: {
   info: Orderer;
   setInfo: (info: Orderer) => void;
+  errors?: {
+    postCode?: string;
+    address1?: string;
+  };
 }) {
-  const [postcode, setPostcode] = useState("");
-  const [address, setAddress] = useState("");
   const [error, setError] = useState("");
 
-  const fetchAddress = async (zip: string) => {
+  const fetchAddress = async (zip: string, currentInfo: Orderer) => {
     const cleanedZip = zip.replace("-", "");
     if (cleanedZip.length !== 7) return;
 
@@ -34,34 +37,35 @@ export default function AddressInput({
       if (data.results) {
         const result = data.results[0];
         const fullAddress = `${result.address1}${result.address2}${result.address3}`;
-        setAddress(fullAddress);
-        setInfo({ ...info, address1: fullAddress });
+        setInfo({ ...currentInfo, address1: fullAddress });
         setError("");
       } else {
-        setAddress("");
         setError("該当する住所が見つかりませんでした");
       }
     } catch {
+      setInfo({ ...currentInfo, address1: "" });
       setError("住所の取得に失敗しました");
     }
   };
 
   const handlePostcodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let zip = e.target.value.replace(/[^\d]/g, "");
-    if (zip.length > 3) {
-      zip = zip.slice(0, 3) + "-" + zip.slice(3, 7);
+    let zipNumbers = e.target.value.replace(/[^\d]/g, "");
+    if (zipNumbers.length > 7) {
+      zipNumbers = zipNumbers.slice(0, 7);
     }
 
-    const cleanZip = zip.replace("-", "");
+    let formattedZip = zipNumbers;
+    if (zipNumbers.length > 3) {
+      formattedZip = zipNumbers.slice(0, 3) + "-" + zipNumbers.slice(3);
+    }
 
-    setInfo({ ...info, postCode: zip });
+    const newInfo = { ...info, postCode: formattedZip };
+    setInfo(newInfo);
 
-    if (cleanZip.length === 7) {
-      fetchAddress(cleanZip);
+    if (zipNumbers.length === 7) {
+      fetchAddress(zipNumbers, newInfo); // もしくは fetchAddress(zipNumbers)
     }
   };
-
-  const formattedPostCode = info.postCode.replace(/^(\d{3})(\d{4})$/, "$1-$2");
 
   return (
     <div className="flex flex-col mt-2 gap-5 w-[300px]">
@@ -74,13 +78,16 @@ export default function AddressInput({
           <input
             id="postCode"
             type="text"
-            value={formattedPostCode}
+            value={info.postCode}
             onChange={handlePostcodeChange}
             placeholder="123-4567"
             maxLength={8}
             className="border border-gray-300 w-[50%] placeholder-gray-300 rounded px-2 py-1"
           />
         </div>
+        {errors?.postCode && (
+          <p className="text-sm text-red-450 mt-1">{errors.postCode}</p>
+        )}
       </div>
 
       {error && <p className="text-red-500 text-sm">{error}</p>}
@@ -97,6 +104,9 @@ export default function AddressInput({
           className="border border-gray-300 rounded px-2 py-1 placeholder-gray-300 bg-gray-100"
           placeholder="大阪府大阪市北区"
         />
+        {errors?.address1 && (
+          <p className="text-sm text-red-450 mt-1">{errors.address1}</p>
+        )}
       </div>
     </div>
   );

@@ -21,35 +21,7 @@ interface CartItem {
   image: string;
 }
 
-const initialCartItems: CartItem[] = [
-  {
-    id: 1,
-    name: "Mysa（ミーサ）ウールラグ",
-    price: 68000,
-    quantity: 2,
-    color: "ブルー",
-    size: "120×180cm",
-    image: "public/componets/common/new-item/NEW.png",
-  },
-  {
-    id: 2,
-    name: "Sova（ソーヴァ）ベッド",
-    price: 124800,
-    quantity: 1,
-    color: "イエロー",
-    size: "140×200cm",
-    image: "public/componets/common/new-item/NEW2.png",
-  },
-  {
-    id: 3,
-    name: "Bordet（ボルデット）テーブル",
-    price: 22900,
-    quantity: 1,
-    color: "イエロー",
-    size: "140×200cm",
-    image: "public/componets/common/new-item/NEW3.png",
-  },
-];
+const initialCartItems: CartItem[] = [];
 
 interface Orderer {
   email: string;
@@ -62,8 +34,6 @@ interface Orderer {
 }
 
 export default function App() {
-  const [cartItems, setCartItems] = useState<CartItem[]>(initialCartItems);
-
   const handleQuantityChange = (id: number, newQuantity: number) => {
     setCartItems((prev) =>
       prev.map((item) =>
@@ -75,6 +45,7 @@ export default function App() {
   const handleRemove = (id: number) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
+  const [cartItems, setCartItems] = useState<CartItem[]>(initialCartItems);
 
   const [ordererInfo, setOrdererInfo] = useState<Orderer>({
     email: "",
@@ -86,6 +57,36 @@ export default function App() {
     address3: "",
   });
 
+  const [recipientInfo, setRecipientInfo] = useState<Orderer>({
+    email: "",
+    name: "",
+    nameKana: "",
+    postCode: "",
+    address1: "",
+    address2: "",
+    address3: "",
+  });
+
+  const [isChecked, setIsChecked] = useState(true);  
+
+  const handleAddToCart = (item: CartItem) => {
+    setCartItems((prev) => {
+      const existingItem = prev.find(
+        (i) =>
+          i.id === item.id && i.color === item.color && i.size === item.size,
+      );
+      if (existingItem) {
+        return prev.map((i) =>
+          i.id === item.id && i.color === item.color && i.size === item.size
+            ? { ...i, quantity: i.quantity + item.quantity }
+            : i,
+        );
+      } else {
+        return [...prev, item];
+      }
+    });
+  };
+
   return (
     <Router>
       <ScrollToTop />
@@ -93,7 +94,10 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Top />} />
           <Route path="/items" element={<Items />} />
-          <Route path="/item-detail" element={<ItemDetail />} />
+          <Route
+            path="/item-detail/:id"
+            element={<ItemDetail onAddToCart={handleAddToCart} />}
+          />
           <Route
             path="/cart"
             element={
@@ -111,6 +115,10 @@ export default function App() {
                 info={ordererInfo}
                 setInfo={setOrdererInfo}
                 cartItems={cartItems}
+                 isChecked={isChecked}
+                setIsChecked={setIsChecked}
+                recipientInfo={recipientInfo} 
+              setRecipientInfo={setRecipientInfo}
               />
             }
           />

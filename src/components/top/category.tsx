@@ -36,7 +36,10 @@ export default function Category() {
       <ul className="flex flex-wrap justify-center gap-5 mt-8">
         {categories.map((category, index) => (
           <li key={index} className="items-start justify-center">
-            <a href="/items" className="hover:opacity-90 text-center">
+            <Link
+              to={`/items?category=${encodeURIComponent(category.label)}`}
+              className="hover:opacity-90 text-center"
+            >
               <div className="flex justify-center mb-2">
                 <img
                   src={category.src}
@@ -45,7 +48,7 @@ export default function Category() {
                 />
               </div>
               <p className="text-xs w-[5.3rem]">{category.label}</p>
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

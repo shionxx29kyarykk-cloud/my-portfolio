@@ -1,28 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import MainButton from "../components/common/ui/main-butto";
 import SubButton from "../components/common/ui/sub-button";
-
-interface CartItem {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  color: string;
-  size: string;
-  image: string;
-}
-
-interface Orderer {
-  email: string;
-  name: string;
-  nameKana: string;
-  postCode: string;
-  address1: string;
-  address2: string;
-  address3?: string;
-}
+import { Orderer, CartItem } from "../assets/data/order";
 
 export default function Confirm() {
+  const navigate = useNavigate();
   const location = useLocation();
 
   if (!location.state) {
@@ -170,7 +152,11 @@ export default function Confirm() {
           <SubButton
             to={{
               pathname: "/order",
-              state: { info: orderer },
+              state: {
+                info: orderer,
+                recipientInfo: recipient,
+                isChecked: recipient === null,
+              },
             }}
             className="text-[17px] py-3.5 px-6"
           >

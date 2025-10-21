@@ -6,6 +6,7 @@ interface InputProps {
   placeholder?: string;
   value?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: string;
 }
 
 export default function Input({
@@ -16,6 +17,7 @@ export default function Input({
   placeholder,
   value,
   onChange,
+  error,
 }: InputProps) {
   return (
     <div className={`${width} flex flex-col text-[16.5px] gap-2 pt-2`}>
@@ -32,6 +34,7 @@ export default function Input({
         placeholder={placeholder}
         className="placeholder-gray-300 px-2 border py-1 border-gray-320 rounded-[5px]"
       />
+      {error && <p className="text-sm text-red-450 mt-1">{error}</p>}
     </div>
   );
 }

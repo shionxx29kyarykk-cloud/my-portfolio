@@ -1,57 +1,66 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import OrderInput from "../components/common/ui/order-input";
-
-interface Orderer {
-  email: string;
-  name: string;
-  nameKana: string;
-  postCode: string;
-  address1: string;
-  address2: string;
-  address3?: string;
-}
-
-interface CartItem {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  color: string;
-  size: string;
-  image: string;
-}
+import { Orderer, CartItem } from "../assets/data/order";
+import { validateOrderer } from "../utils/validation";
 
 export default function Order({
   cartItems,
   info,
   setInfo,
+  isChecked,
+  setIsChecked,
+  recipientInfo,
+  setRecipientInfo,
 }: {
   info: Orderer;
   setInfo: (val: Orderer) => void;
   cartItems: CartItem[];
+  isChecked: boolean;
+  setIsChecked: (val: boolean) => void;
+  recipientInfo: Orderer;
+  setRecipientInfo: (val: Orderer) => void;
 }) {
-  const [isChecked, setIsChecked] = useState(true);
   const navigate = useNavigate();
-
-  const [recipientInfo, setRecipientInfo] = useState<Orderer>({
-    email: "",
-    name: "",
-    nameKana: "",
-    postCode: "",
-    address1: "",
-    address2: "",
-    address3: "",
-  });
+  const location = useLocation();
+  const [ordererErrors, setErrors] = useState<{ [key: string]: string }>({});
+  const [recipientErrors, setRecipientErrors] = useState<{
+    [key: string]: string;
+  }>({});
 
   const handleConfirm = () => {
-    navigate("/confirm", {
-      state: {
-        orderer: info,
-        recipient: isChecked ? null : recipientInfo,
-        cartItems: cartItems,
-      },
-    });
+    const ordererValidationErrors = validateOrderer(info);
+    setErrors(ordererValidationErrors);
+
+    let recipientValidationErrors: { [key: string]: string } = {};
+    if (!isChecked) {
+      recipientValidationErrors = validateOrderer(recipientInfo);
+      setRecipientErrors(recipientValidationErrors);
+    } else {
+      setRecipientErrors({});
+    }
+
+    const isOrdererValid = Object.keys(ordererValidationErrors).length === 0;
+    const isRecipientValid =
+      isChecked || Object.keys(recipientValidationErrors).length === 0;
+
+    if (isOrdererValid && isRecipientValid) {
+      navigate("/confirm", {
+        state: {
+          orderer: info,
+          recipient: isChecked ? null : recipientInfo,
+          cartItems,
+        },
+      });
+    }
+  };
+
+  const handleCheckboxChange = (checked: boolean) => {
+    setIsChecked(checked);
+    if (checked) {
+      setRecipientInfo(info);
+      setRecipientErrors({});
+    }
   };
 
   return (
@@ -64,7 +73,12 @@ export default function Order({
           ご注文情報
         </h3>
         <div className="border-b border-gray-300 pb-10">
-          <OrderInput info={info} setInfo={setInfo} isAddressSame />
+          <OrderInput
+            info={info}
+            setInfo={setInfo}
+            isAddressSame
+            errors={ordererErrors}
+          />
         </div>
         <p className="font-bold p-3 mt-3">お届け先</p>
         <div className="flex items-center gap-1.5 pl-3">
@@ -72,7 +86,7 @@ export default function Order({
             <input
               type="checkbox"
               checked={isChecked}
-              onChange={(e) => setIsChecked(e.target.checked)}
+              onChange={(e) => handleCheckboxChange(e.target.checked)}
               className="w-5 h-5 border border-gray-300 rounded checked:bg-blue-400 checked:border-blue-400"
             />
             <span>ご注文者情報の住所と同じ</span>
@@ -80,7 +94,11 @@ export default function Order({
         </div>
         {isChecked === false && (
           <div className="border-b mt-2 border-gray-300 pb-10">
-            <OrderInput info={recipientInfo} setInfo={setRecipientInfo} />
+            <OrderInput
+              info={recipientInfo}
+              setInfo={setRecipientInfo}
+              errors={recipientErrors}
+            />
           </div>
         )}
 

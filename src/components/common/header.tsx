@@ -14,10 +14,10 @@ export default function Header() {
         </a>
 
         <nav className="flex gap-16 text-base font-bold ">
-          <a href="#" className="hover:underline">
+          <a href="/#" className="hover:underline">
             商品を探す
           </a>
-          <a href="#" className="hover:underline">
+          <a href="/#" className="hover:underline">
             おすすめコンテンツ
           </a>
         </nav>
