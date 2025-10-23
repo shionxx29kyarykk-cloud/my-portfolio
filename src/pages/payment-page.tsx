@@ -71,19 +71,28 @@ const PaymentPage = forwardRef<PaymentHandle>((props, ref) => {
     getPaymentData,
   }));
 
+  const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value.replace(/\D/g, "");
+    value = value.slice(0, 16);
+
+    const formatted = value.replace(/(.{4})/g, "$1 ").trim();
+    setCardNumber(formatted);
+  };
+
+  // 🔹 有効期限（MM/YY）自動フォーマット
   const handleExpiryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  let value = e.target.value.replace(/\D/g, "");
+    let value = e.target.value.replace(/\D/g, "");
 
-  if (value.length > 2) {
-    value = value.slice(0, 2) + "/" + value.slice(2, 4);
-  }
+    if (value.length > 2) {
+      value = value.slice(0, 2) + "/" + value.slice(2, 4);
+    }
 
-  if (value.length > 5) {
-    value = value.slice(0, 5);
-  }
+    if (value.length > 5) {
+      value = value.slice(0, 5);
+    }
 
-  setExpiry(value);
-};
+    setExpiry(value);
+  };
 
   return (
     <div>
@@ -115,7 +124,7 @@ const PaymentPage = forwardRef<PaymentHandle>((props, ref) => {
           idName="cardNumber"
           value={cardNumber}
           placeholder="1234 5678 9012 3456"
-          onChange={(e) => setCardNumber(e.target.value)}
+          onChange={handleCardNumberChange}
           error={errors.cardNumber}
         />
 
@@ -125,7 +134,7 @@ const PaymentPage = forwardRef<PaymentHandle>((props, ref) => {
             idName="expiry"
             value={expiry}
             placeholder="MM/YY"
-              onChange={handleExpiryChange}
+            onChange={handleExpiryChange}
             error={errors.expiry}
             width="w-48"
           />

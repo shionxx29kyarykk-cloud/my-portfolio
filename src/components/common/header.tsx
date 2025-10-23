@@ -4,8 +4,15 @@ import {
   IconShoppingCart,
   IconUserCircle,
 } from "@tabler/icons-react";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
+    const navigate = useNavigate();
+    
+  const handleScrollToCategory = (e: React.MouseEvent) => {
+    e.preventDefault();
+    (window as any).scrollToCategory?.();
+  };
   return (
     <header className="absolute w-full z-10">
       <div className="max-w-[1244px] h-[40px] mx-auto flex items-center pt-12 justify-between px-20">
@@ -13,13 +20,24 @@ export default function Header() {
           <div className="text-4xl font-onest font-bold">Lumière</div>
         </a>
 
-        <nav className="flex gap-16 text-base font-bold ">
-          <a href="/#" className="hover:underline">
+        <nav className="flex gap-16 text-base font-bold">
+          <button
+            onClick={() => navigate("/", { state: { scrollTo: "category" } })}
+            className="relative after:content-[''] after:absolute after:left-0 after:bottom-[-2px]
+                       after:w-0 after:h-[1.5px] after:bg-black after:transition-all after:duration-300
+                       hover:after:w-full"
+          >
             商品を探す
-          </a>
-          <a href="/#" className="hover:underline">
+          </button>
+
+          <button
+            onClick={() => navigate("/", { state: { scrollTo: "pickup" } })}
+            className="relative after:content-[''] after:absolute after:left-0 after:bottom-[-2px]
+                       after:w-0 after:h-[1.5px] after:bg-black after:transition-all after:duration-300
+                       hover:after:w-full"
+          >
             おすすめコンテンツ
-          </a>
+          </button>
         </nav>
 
         <div className="flex items-center gap-6">
