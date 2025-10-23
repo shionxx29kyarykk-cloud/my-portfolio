@@ -29,10 +29,8 @@ export default function Items() {
   return (
     <div className="p-5 pt-7 pb-20 w-[80%] mx-auto">
       <h1 className="font-bold text-[26px] mb-6 text-center mt-5">
-        {selectedCategory ? (
+        {selectedCategory && (
           <p className="text-center text-gray-500 mb-4">{selectedCategory}</p>
-        ) : (
-          <p className="text-center text-gray-500 mb-4">新商品</p>
         )}
       </h1>
       <div className="flex items-center justify-between w-[90%] mx-auto">

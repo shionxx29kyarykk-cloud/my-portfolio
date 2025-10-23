@@ -7,6 +7,7 @@ interface MainButtonProps {
   to?: string; // ← optional にする
   onClick?: () => void;
   type?: "button" | "submit";
+  disabled?: boolean;
 }
 
 export default function MainButton({
@@ -15,6 +16,7 @@ export default function MainButton({
   to,
   onClick,
   type = "button",
+  disabled,
 }: MainButtonProps) {
   const baseClass = `w-full md:w-72 bg-blue-400 hover:opacity-90 text-white font-bold rounded transition text-center ${className}`;
 
@@ -23,7 +25,12 @@ export default function MainButton({
       {children}
     </Link>
   ) : (
-    <button type={type} onClick={onClick} className={baseClass}>
+    <button
+      type={type}
+      onClick={onClick}
+      className={baseClass}
+      disabled={disabled}
+    >
       {children}
     </button>
   );

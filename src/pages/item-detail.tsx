@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 import SpinButton from "../components/common/ui/spin-button";
 import LikeButton from "../components/common/ui/like-button";
-import Badge from "../components/common/ui/new-badge";
 import RelatedItem from "../components/top/related-item";
 import PickUp from "../components/top/pick-up";
 import MainButton from "../components/common/ui/main-butto";
@@ -48,6 +47,7 @@ export default function ItemDetail({ onAddToCart }: ItemDetailProps) {
   if (!product) {
     return <p>商品が見つかりません</p>;
   }
+  const [imageIndex, setImageIndex] = useState(0);
 
   const [likedItems, setLikedItems] = useState<{ [id: number]: boolean }>({});
   const [selectedColor, setSelectedColor] = useState(colors[0].value);
@@ -68,11 +68,15 @@ export default function ItemDetail({ onAddToCart }: ItemDetailProps) {
   );
 
   const prev = () => {
-    setCurrentIndex((idx) => (idx === 0 ? itemLists.length - 1 : idx - 1));
+    setImageIndex((idx) =>
+      idx === 0 ? (itemList.images?.length || 1) - 1 : idx - 1,
+    );
   };
 
   const next = () => {
-    setCurrentIndex((idx) => (idx === itemLists.length - 1 ? 0 : idx + 1));
+    setImageIndex((idx) =>
+      idx === (itemList.images?.length || 1) - 1 ? 0 : idx + 1,
+    );
   };
 
   const [quantity, setQuantity] = useState(1);
@@ -94,6 +98,8 @@ export default function ItemDetail({ onAddToCart }: ItemDetailProps) {
     navigate("/cart");
   };
 
+  const mainImage = itemList.images?.[imageIndex] || itemList.src;
+
   return (
     <div className="pt-14 w-full mx-auto">
       <ul className="flex flex-wrap justify-center gap-12 relative">
@@ -107,7 +113,7 @@ export default function ItemDetail({ onAddToCart }: ItemDetailProps) {
             </button>
 
             <img
-              src={itemList.src}
+              src={mainImage}
               alt="商品詳細"
               className="w-[500px] object-cover"
             />
@@ -120,14 +126,14 @@ export default function ItemDetail({ onAddToCart }: ItemDetailProps) {
             </button>
           </div>
           <div className="flex w-[24.5rem] mx-auto gap-2 justify-center">
-            {itemLists.slice(0, 4).map((itemList, index) => (
+            {product.images?.map((img, index) => (
               <img
                 key={index}
-                src={itemList.src}
+                src={img}
                 alt={`サムネイル${index + 1}`}
-                className={`w-1/5 object-cover cursor-pointer transition hover:opacity-90
-                  ${currentIndex === index ? "border-2 border-blue-400" : "border"}`}
-                onClick={() => setCurrentIndex(index)}
+                className={`w-1/5 object-cover cursor-pointer transition hover:opacity-90 
+        ${imageIndex === index ? "border-2 border-blue-400" : "border"}`}
+                onClick={() => setImageIndex(index)}
               />
             ))}
           </div>

@@ -4,6 +4,7 @@ export interface ItemList {
   label: string;
   price: number;
   isNew?: boolean;
+  images?: string[];
 }
 
 export const itemLists: ItemList[] = [
@@ -13,30 +14,61 @@ export const itemLists: ItemList[] = [
     label: "Mysa（ミーサ）ウールラグ",
     price: 68000,
     isNew: true,
+    images: [
+      "/componets/common/new-item/NEW.png",
+      "/componets/common/new-item/NEW2.png",
+      "/componets/common/new-item/NEW3.png",
+      "/componets/common/new-item/NEW4.png",
+    ],
   },
   {
     id: 2,
-    src: "/componets/common/new-item/NEW2.png",
+    src: "/componets/common/new-item/NEW3.png",
     label: "Sova（ソーヴァ）ベッド",
     price: 124800,
+    images: [
+      "/componets/common/new-item/NEW3.png",
+      "/componets/common/new-item/NEW.png",
+      "/componets/common/new-item/NEW2.png",
+      "/componets/common/new-item/NEW4.png",
+    ],
   },
   {
     id: 3,
-    src: "/componets/common/new-item/NEW3.png",
+    src: "/componets/common/new-item/NEW4.png",
     label: "Bordet（ボルデット）テーブル",
     price: 22900,
+    images: [
+      "/componets/common/new-item/NEW4.png",
+      "/componets/common/new-item/NEW.png",
+      "/componets/common/new-item/NEW2.png",
+      "/componets/common/new-item/NEW3.png",
+    ],
   },
   {
     id: 4,
-    src: "/componets/common/new-item/NEW4.png",
+    src: "/componets/common/new-item/NEW2.png",
     label: "Lumo（ルモ）チェア",
     price: 19800,
+    images: [
+      "/componets/common/new-item/NEW2.png",
+
+      "/componets/common/new-item/NEW.png",
+      "/componets/common/new-item/NEW3.png",
+      "/componets/common/new-item/NEW4.png",
+    ],
   },
   {
     id: 5,
     src: "/componets/common/new-item/NEW2.png",
     label: "Fika（フィーカ）アームチェア",
     price: 24800,
+    images: [
+      "/componets/common/new-item/NEW2.png",
+      "/componets/common/new-item/NEW.png",
+      "/componets/common/new-item/NEW3.png",
+      "/componets/common/new-item/NEW4.png",
+    ],
   },
   {
     id: 6,
@@ -44,18 +76,36 @@ export const itemLists: ItemList[] = [
     label: "Arco（アルコ）フロアランプ",
     price: 16000,
     isNew: true,
+    images: [
+      "/componets/common/ranking2/ランキング2.png",
+      "/componets/common/new-item/NEW2.png",
+      "/componets/common/new-item/NEW3.png",
+      "/componets/common/new-item/NEW4.png",
+    ],
   },
   {
     id: 7,
     src: "/componets/common/ranking2/ランキング3.png",
     label: "Ligno（リグノ）オープンシェルフ",
     price: 15800,
+    images: [
+      "/componets/common/ranking2/ランキング3.png",
+      "/componets/common/new-item/NEW2.png",
+      "/componets/common/new-item/NEW3.png",
+      "/componets/common/new-item/NEW4.png",
+    ],
   },
   {
     id: 8,
     src: "/componets/common/ranking2/ランキング4.png",
     label: "Natura（ナチュラ）ウッドアームチェア",
     price: 25300,
+    images: [
+      "/componets/common/ranking2/ランキング4.png",
+      "/componets/common/new-item/NEW2.png",
+      "/componets/common/new-item/NEW3.png",
+      "/componets/common/new-item/NEW4.png",
+    ],
   },
   {
     id: 9,
@@ -63,12 +113,24 @@ export const itemLists: ItemList[] = [
     label: "Mysa（ミーサ）ウールラグ",
     price: 68000,
     isNew: true,
+    images: [
+      "/componets/common/new-item/NEW.png",
+      "/componets/common/new-item/NEW2.png",
+      "/componets/common/new-item/NEW3.png",
+      "/componets/common/new-item/NEW4.png",
+    ],
   },
   {
     id: 10,
     src: "/componets/common/new-item/NEW2.png",
     label: "Sova（ソーヴァ）ベッド",
     price: 124800,
+    images: [
+      "/componets/common/new-item/NEW2.png",
+      "/componets/common/new-item/NEW.png",
+      "/componets/common/new-item/NEW3.png",
+      "/componets/common/new-item/NEW4.png",
+    ],
   },
   {
     id: 11,
@@ -76,12 +138,24 @@ export const itemLists: ItemList[] = [
     label: "Bordet（ボルデット）テーブル",
     price: 22900,
     isNew: true,
+    images: [
+      "/componets/common/new-item/NEW3.png",
+      "/componets/common/new-item/NEW.png",
+      "/componets/common/new-item/NEW2.png",
+      "/componets/common/new-item/NEW4.png",
+    ],
   },
   {
     id: 12,
     src: "/componets/common/new-item/NEW4.png",
     label: "Lumo（ルモ）チェア",
     price: 19800,
+    images: [
+      "/componets/common/new-item/NEW4.png",
+      "/componets/common/new-item/NEW.png",
+      "/componets/common/new-item/NEW2.png",
+      "/componets/common/new-item/NEW3.png",
+    ],
   },
   {
     id: 13,
@@ -89,71 +163,143 @@ export const itemLists: ItemList[] = [
     label: "Mysa（ミーサ）ウールラグ",
     price: 68000,
     isNew: true,
+    images: [
+      "/componets/common/new-item/NEW.png",
+      "/componets/common/new-item/NEW2.png",
+      "/componets/common/new-item/NEW3.png",
+      "/componets/common/new-item/NEW4.png",
+    ],
   },
   {
     id: 14,
     src: "/componets/common/new-item/NEW2.png",
     label: "Sova（ソーヴァ）ベッド",
     price: 124800,
+    images: [
+      "/componets/common/new-item/NEW2.png",
+      "/componets/common/new-item/NEW.png",
+      "/componets/common/new-item/NEW3.png",
+      "/componets/common/new-item/NEW4.png",
+    ],
   },
   {
     id: 15,
     src: "/componets/common/new-item/NEW3.png",
     label: "Bordet（ボルデット）テーブル",
     price: 22900,
+    images: [
+      "/componets/common/new-item/NEW3.png",
+      "/componets/common/new-item/NEW.png",
+      "/componets/common/new-item/NEW2.png",
+      "/componets/common/new-item/NEW4.png",
+    ],
   },
   {
     id: 16,
     src: "/componets/common/new-item/NEW4.png",
     label: "Lumo（ルモ）チェア",
     price: 19800,
+    images: [
+      "/componets/common/new-item/NEW4.png",
+      "/componets/common/new-item/NEW.png",
+      "/componets/common/new-item/NEW2.png",
+      "/componets/common/new-item/NEW3.png",
+    ],
   },
   {
     id: 17,
     src: "/componets/common/new-item/NEW.png",
     label: "Mysa（ミーサ）ウールラグ",
     price: 68000,
+    images: [
+      "/componets/common/new-item/NEW.png",
+      "/componets/common/new-item/NEW2.png",
+      "/componets/common/new-item/NEW3.png",
+      "/componets/common/new-item/NEW4.png",
+    ],
   },
   {
     id: 18,
     src: "/componets/common/new-item/NEW2.png",
     label: "Sova（ソーヴァ）ベッド",
     price: 124800,
+    images: [
+      "/componets/common/new-item/NEW2.png",
+      "/componets/common/new-item/NEW.png",
+      "/componets/common/new-item/NEW3.png",
+      "/componets/common/new-item/NEW4.png",
+    ],
   },
   {
     id: 19,
     src: "/componets/common/new-item/NEW3.png",
     label: "Bordet（ボルデット）テーブル",
     price: 22900,
+    images: [
+      "/componets/common/new-item/NEW3.png",
+      "/componets/common/new-item/NEW.png",
+      "/componets/common/new-item/NEW2.png",
+      "/componets/common/new-item/NEW4.png",
+    ],
   },
   {
     id: 20,
     src: "/componets/common/new-item/NEW4.png",
     label: "Lumo（ルモ）チェア",
     price: 19800,
+    images: [
+      "/componets/common/new-item/NEW4.png",
+      "/componets/common/new-item/NEW.png",
+      "/componets/common/new-item/NEW2.png",
+      "/componets/common/new-item/NEW3.png",
+    ],
   },
   {
     id: 21,
     src: "/componets/common/new-item/NEW.png",
     label: "Mysa（ミーサ）ウールラグ",
     price: 68000,
+    images: [
+      "/componets/common/new-item/NEW.png",
+      "/componets/common/new-item/NEW2.png",
+      "/componets/common/new-item/NEW3.png",
+      "/componets/common/new-item/NEW4.png",
+    ],
   },
   {
     id: 22,
     src: "/componets/common/new-item/NEW2.png",
     label: "Sova（ソーヴァ）ベッド",
     price: 124800,
+    images: [
+      "/componets/common/new-item/NEW2.png",
+      "/componets/common/new-item/NEW.png",
+      "/componets/common/new-item/NEW3.png",
+      "/componets/common/new-item/NEW4.png",
+    ],
   },
   {
     id: 23,
     src: "/componets/common/new-item/NEW3.png",
     label: "Bordet（ボルデット）テーブル",
     price: 22900,
+    images: [
+      "/componets/common/new-item/NEW3.png",
+      "/componets/common/new-item/NEW.png",
+      "/componets/common/new-item/NEW2.png",
+      "/componets/common/new-item/NEW4.png",
+    ],
   },
   {
     id: 24,
     src: "/componets/common/new-item/NEW4.png",
     label: "Lumo（ルモ）チェア",
     price: 19800,
+    images: [
+      "/componets/common/new-item/NEW4.png",
+      "/componets/common/new-item/NEW.png",
+      "/componets/common/new-item/NEW2.png",
+      "/componets/common/new-item/NEW3.png",
+    ],
   },
 ];

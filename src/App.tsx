@@ -67,7 +67,7 @@ export default function App() {
     address3: "",
   });
 
-  const [isChecked, setIsChecked] = useState(true);  
+  const [isChecked, setIsChecked] = useState(true);
 
   const handleAddToCart = (item: CartItem) => {
     setCartItems((prev) => {
@@ -115,10 +115,10 @@ export default function App() {
                 info={ordererInfo}
                 setInfo={setOrdererInfo}
                 cartItems={cartItems}
-                 isChecked={isChecked}
+                isChecked={isChecked}
                 setIsChecked={setIsChecked}
-                recipientInfo={recipientInfo} 
-              setRecipientInfo={setRecipientInfo}
+                recipientInfo={recipientInfo}
+                setRecipientInfo={setRecipientInfo}
               />
             }
           />

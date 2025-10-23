@@ -2,10 +2,14 @@ import { useLocation, useNavigate } from "react-router-dom";
 import MainButton from "../components/common/ui/main-butto";
 import SubButton from "../components/common/ui/sub-button";
 import { Orderer, CartItem } from "../assets/data/order";
+import PaymentPage from "./payment-page";
+import { useRef, useState } from "react";
 
 export default function Confirm() {
   const navigate = useNavigate();
   const location = useLocation();
+  const paymentRef = useRef<any>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   if (!location.state) {
     return (
@@ -32,6 +36,21 @@ export default function Confirm() {
       (total, item) => total + item.price * item.quantity,
       0,
     );
+  };
+
+  const handleConfirmOrder = () => {
+    const isValid = paymentRef.current?.validatePayment();
+
+    if (!isValid) {
+      console.log("❌ 支払い情報にエラーがあります");
+      return;
+    }
+    setIsProcessing(true);
+
+    setTimeout(() => {
+      setIsProcessing(false);
+      navigate("/complete");
+    }, 2500);
   };
 
   return (
@@ -145,9 +164,42 @@ export default function Confirm() {
           <p className="text-xl">合計：</p>
           <p className="text-[22.5px]">¥{getTotal().toLocaleString()}</p>
         </div>
+        <PaymentPage ref={paymentRef} />
         <div className="flex flex-col items-end gap-3">
-          <MainButton to="/complete" className="text-[17px] py-3.5 px-6">
-            注文を確定する
+          <MainButton
+            onClick={handleConfirmOrder}
+            className={`text-[17px] py-3.5 px-6 flex items-center justify-center gap-2 ${
+              isProcessing ? "bg-gray-400 cursor-not-allowed" : ""
+            }`}
+            disabled={isProcessing}
+          >
+            {isProcessing ? (
+              <>
+                <svg
+                  className="animate-spin h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                  ></path>
+                </svg>
+                <span>支払い処理中...</span>
+              </>
+            ) : (
+              "注文を確定する"
+            )}
           </MainButton>
           <SubButton
             to={{
