@@ -7,7 +7,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const isTopPage = location.pathname === "/";
 
   return (
-    <div className=" flex flex-col">
+    <div className="flex flex-col">
       <Header />
       {!isTopPage && (
         <img
