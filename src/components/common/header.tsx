@@ -23,7 +23,7 @@ export default function Header() {
         <Link to="/" className="hover:opacity-90">
           <div className="text-4xl font-onest font-bold">Lumière</div>
         </Link>
-        <nav className="hidden md:flex gap-12 lg:gap-24 text-base font-bold">
+        <nav className="hidden md:flex gap-20 lg:gap-24 text-base font-bold">
           <button
             onClick={() => navigate("/", { state: { scrollTo: "category" } })}
             className="relative after:content-[''] after:absolute after:left-0 after:bottom-[-2px]
