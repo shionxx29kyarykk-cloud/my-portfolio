@@ -2,7 +2,7 @@ import MainButton from "../components/common/ui/main-butto";
 
 export default function Complete() {
   return (
-    <div className="flex flex-col items-center mb-12">
+    <div className="flex flex-col items-center mb-12 w-[50%] mx-auto">
       <h1 className="font-bold text-[26px] text-center mt-12 mb-4">
         THANK YOU!!
       </h1>

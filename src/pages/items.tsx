@@ -5,7 +5,7 @@ import PaginatedList from "../components/common/ui/pagination";
 import SortControls from "../components/common/ui/sort-button";
 import Pagination from "../components/common/ui/pagination";
 import LikeButton from "../components/common/ui/like-button";
-import { itemLists, ItemList } from "../assets/data/items";
+import { itemLists } from "../assets/data/items";
 import NewBadge from "../components/common/ui/new-badge";
 
 export default function Items() {

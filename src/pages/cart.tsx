@@ -3,6 +3,9 @@ import SpinButton from "../components/common/ui/spin-button";
 import MainButton from "../components/common/ui/main-butto";
 import SubButton from "../components/common/ui/sub-button";
 import RelatedItem from "../components/top/related-item";
+import { Link } from "react-router-dom";
+import { itemLists } from "../assets/data/items";
+
 
 interface CartItem {
   id: number;
@@ -30,37 +33,37 @@ export default function Cart({
 
   return (
     <>
-      <div className="pt-7 w-[70%] mx-auto">
+      <div className="pt-7 w-[70%] lg:w-[50%] mx-auto">
         <h1 className="font-bold text-[26px] mb-9 text-center mt-5">カート</h1>
         {cartItems.length > 0 ? (
           <table className="w-full border-collapse text-left">
             <thead>
               <tr className="text-[17px]">
                 <th className="p-3">商品</th>
-                <th className="p-3 w-96"></th>
+                <th className="p-3 w-96 lg:w-[35rem]"></th>
                 <th className="p-3 w-48">数量</th>
-                <th className="p-3 w-26">小計</th>
+                <th className="p-3 w-26 lg:w-20">小計</th>
               </tr>
             </thead>
             <tbody>
               {cartItems.map((item) => (
                 <tr key={item.id} className="border-t border-gray-300 border-b">
                   <td className="w-40">
-                    <a href="/item-detail" className="hover:opacity-90">
+                    <Link to={`/item-detail/${item.id}`} className="hover:opacity-90">
                       <img
                         src={item.image}
                         alt={item.name}
                         className="w-28 h-28 object-cover"
                       />
-                    </a>
+                    </Link>
                   </td>
                   <td className="flex gap-1 flex-col my-2.5">
-                    <a
-                      href="/item-detail"
+                    <Link
+                      to={`/item-detail/${item.id}`} 
                       className="hover:underline font-bold text-[17.5px]"
                     >
                       {item.name}
-                    </a>
+                    </Link>
                     <div className="text-gray-500">{item.color}</div>
                     <div className="text-gray-500">{item.size}</div>
                     <div className="font text-[18px]">

@@ -11,12 +11,11 @@ export default function Header() {
 
   return (
     <header className="absolute w-full z-10">
-      <div className="max-w-[1244px] h-[40px] mx-auto flex items-center pt-12 justify-between px-20">
+      <div className="max-w-[1244px] h-[60px] mx-auto flex items-center pt-2 md:pt-8 lg:pt-16 sm:pt-2 justify-between px-20 lg:px-0">
         <Link to="/" className="hover:opacity-90">
           <div className="text-4xl font-onest font-bold">Lumière</div>
         </Link>
-
-        <nav className="flex gap-16 text-base font-bold">
+         <nav className="hidden md:flex gap-12 lg:gap-24 text-base font-bold">
           <button
             onClick={() => navigate("/", { state: { scrollTo: "category" } })}
             className="relative after:content-[''] after:absolute after:left-0 after:bottom-[-2px]
@@ -41,7 +40,7 @@ export default function Header() {
             <input
               type="text"
               placeholder="商品を探す"
-              className="w-40 md:w-64 text-base px-3 py-1.5 rounded-full bg-transparent placeholder:font-medium placeholder-white font-bold border-2.5 border-white focus:outline-none focus:ring-1"
+              className="w-72 md:w-64 text-base px-3 py-1.5 rounded-full bg-transparent placeholder:font-medium placeholder-white font-bold border-2.5 border-white focus:outline-none focus:ring-1"
             />
             <span className="absolute right-3 top-1/2 -translate-y-1/2 text-white">
               <IconSearch />
