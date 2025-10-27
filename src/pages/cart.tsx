@@ -4,8 +4,6 @@ import MainButton from "../components/common/ui/main-butto";
 import SubButton from "../components/common/ui/sub-button";
 import RelatedItem from "../components/top/related-item";
 import { Link } from "react-router-dom";
-import { itemLists } from "../assets/data/items";
-
 
 interface CartItem {
   id: number;
@@ -41,15 +39,18 @@ export default function Cart({
               <tr className="text-[17px]">
                 <th className="p-3">商品</th>
                 <th className="p-3 w-96 lg:w-[35rem]"></th>
-                <th className="p-3 w-48">数量</th>
+                <th className="p-3 w-42">数量</th>
                 <th className="p-3 w-26 lg:w-20">小計</th>
               </tr>
             </thead>
             <tbody>
               {cartItems.map((item) => (
                 <tr key={item.id} className="border-t border-gray-300 border-b">
-                  <td className="w-40">
-                    <Link to={`/item-detail/${item.id}`} className="hover:opacity-90">
+                  <td className="w-40 md:w-32">
+                    <Link
+                      to={`/item-detail/${item.id}`}
+                      className="hover:opacity-90"
+                    >
                       <img
                         src={item.image}
                         alt={item.name}
@@ -57,9 +58,9 @@ export default function Cart({
                       />
                     </Link>
                   </td>
-                  <td className="flex gap-1 flex-col my-2.5">
+                  <td className="flex gap-1 flex-col ml-2 my-2.5">
                     <Link
-                      to={`/item-detail/${item.id}`} 
+                      to={`/item-detail/${item.id}`}
                       className="hover:underline font-bold text-[17.5px]"
                     >
                       {item.name}

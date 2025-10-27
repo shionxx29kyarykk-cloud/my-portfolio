@@ -30,7 +30,7 @@ export default function NewItem() {
                     <p className="font-bold font-onest text-[26px] mb-8">
                       NEW ITEM
                     </p>
-                    <p className="text-base font-bold mb-8 absolute left-52 w-12">
+                    <p className="text-base font-bold mb-8 absolute left-52 w-20">
                       新商品
                     </p>
                   </div>

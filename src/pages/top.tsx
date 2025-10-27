@@ -10,14 +10,13 @@ export default function Top() {
   const pickUpRef = useRef<HTMLDivElement | null>(null);
   const location = useLocation();
 
-   useEffect(() => {
+  useEffect(() => {
     if (location.state?.scrollTo === "category") {
       categoryRef.current?.scrollIntoView({ behavior: "smooth" });
     } else if (location.state?.scrollTo === "pickup") {
       pickUpRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [location]);
-
 
   return (
     <>

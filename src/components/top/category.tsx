@@ -14,12 +14,18 @@ export default function Category() {
       src: "/my-portfolio/components/common/category/カテゴリ3.png",
       label: "収納家具",
     },
-    { src: "/my-portfolio/components/common/category/カテゴリ4.png", label: "ベッド" },
+    {
+      src: "/my-portfolio/components/common/category/カテゴリ4.png",
+      label: "ベッド",
+    },
     {
       src: "/my-portfolio/components/common/category/カテゴリ5.png",
       label: "ラグ・カーペット",
     },
-    { src: "/my-portfolio/components/common/category/カテゴリ6.png", label: "照明" },
+    {
+      src: "/my-portfolio/components/common/category/カテゴリ6.png",
+      label: "照明",
+    },
     {
       src: "/my-portfolio/components/common/category/カテゴリ7.png",
       label: "カーテン",

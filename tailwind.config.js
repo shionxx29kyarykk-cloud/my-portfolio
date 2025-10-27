@@ -3,13 +3,13 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     screens: {
-      xs: '360px', // SP
-      sm: '768px', // タブレット
-      md: '1270px', // PC
-      lg: '1920px', // フルHD PC
-      carousel: { raw: '(min-width: 1300px) and (max-width: 1536px)' },
-      carouselSemiLg: { raw: '(min-width: 1537px) and (max-width: 1720px)' },
-      carouselLg: { raw: '(min-width: 1721px)' },
+      xs: "360px", // SP
+      sm: "768px", // タブレット
+      md: "1270px", // PC
+      lg: "1920px", // フルHD PC
+      carousel: { raw: "(min-width: 1300px) and (max-width: 1536px)" },
+      carouselSemiLg: { raw: "(min-width: 1537px) and (max-width: 1720px)" },
+      carouselLg: { raw: "(min-width: 1721px)" },
     },
     extend: {
       fontFamily: {

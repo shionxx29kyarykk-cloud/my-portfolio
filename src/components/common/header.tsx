@@ -4,18 +4,26 @@ import {
   IconShoppingCart,
   IconUserCircle,
 } from "@tabler/icons-react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export default function Header() {
   const navigate = useNavigate();
-
+  const location = useLocation();
+  const isTopPage = location.pathname === "/";
   return (
-    <header className="absolute w-full z-10">
-      <div className="max-w-[1244px] h-[60px] mx-auto flex items-center pt-2 md:pt-8 lg:pt-16 sm:pt-2 justify-between px-20 lg:px-0">
+    <header className="w-full z-10 relative">
+      {!isTopPage && (
+        <img
+          src="/my-portfolio/components/header/header.png"
+          alt="ヘッダー画像"
+          className="w-full h-auto object-cover"
+        />
+      )}
+      <div className={`${isTopPage && "pt-12 md:pt-12 lg:pt-14"} absolute inset-0 max-w-[1244px] mx-auto flex items-center justify-between px-20 lg:px-0`}>
         <Link to="/" className="hover:opacity-90">
           <div className="text-4xl font-onest font-bold">Lumière</div>
         </Link>
-         <nav className="hidden md:flex gap-12 lg:gap-24 text-base font-bold">
+        <nav className="hidden md:flex gap-12 lg:gap-24 text-base font-bold">
           <button
             onClick={() => navigate("/", { state: { scrollTo: "category" } })}
             className="relative after:content-[''] after:absolute after:left-0 after:bottom-[-2px]

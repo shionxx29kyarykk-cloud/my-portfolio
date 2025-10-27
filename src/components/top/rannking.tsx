@@ -49,7 +49,7 @@ export default function Ranking() {
                     <p className="font-bold font-onest text-[26px] mb-8">
                       RANKING
                     </p>
-                    <p className="text-base font-bold mb-8 absolute left-52 w-12">
+                    <p className="text-base font-bold mb-8 absolute left-52 w-20">
                       人気順
                     </p>
                   </div>
