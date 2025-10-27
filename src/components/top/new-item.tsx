@@ -22,7 +22,6 @@ export default function NewItem() {
           .map((itemList) => (
             <li key={itemList.id} className="flex flex-col items-start">
               <Link
-                // to={`/items?new=${encodeURIComponent("新商品")}`}
                 to={`/item-detail/${itemList.id}`}
                 className="hover:opacity-90"
               >

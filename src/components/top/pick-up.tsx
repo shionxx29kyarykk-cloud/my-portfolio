@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 export default function PickUp() {
   const categories = [
-    { src: "/componets/common/pick-up/pick-up1.png" },
-    { src: "/componets/common/pick-up/pick-up2.png" },
+    { src: "/components/common/pick-up/pick-up1.png" },
+    { src: "/components/common/pick-up/pick-up2.png" },
   ];
 
   return (

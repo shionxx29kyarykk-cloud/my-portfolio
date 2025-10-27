@@ -7,7 +7,7 @@ export default function Complete() {
         THANK YOU!!
       </h1>
       <img
-        src="public/componets/common/complete/完了.png"
+        src="/components/common/complete/完了.png"
         alt="完了"
         className="w-40 mb-4"
       />
