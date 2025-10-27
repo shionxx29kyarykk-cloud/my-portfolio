@@ -22,7 +22,7 @@ export default function Top() {
   return (
     <>
       <div className="pt-3 relative w-[95%] mx-auto">
-        <img src="/components/top.png" alt="トップ画像" />
+        <img src="/my-portfolio/components/top.png" alt="トップ画像" />
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
           <p className="text-white text-2xl mb-2">
             光と余白を楽しむ、心地よい暮らしを。

@@ -7,17 +7,17 @@ export default function Footer() {
           <ul className="flex gap-1 mt-16 text-sm">
             <li>
               <a href="/about" className="hover:underline">
-                <img src="/components/footer/Icon.png" />
+                <img src="/my-portfolio/components/footer/Icon.png" />
               </a>
             </li>
             <li>
               <a href="/about" className="hover:underline">
-                <img src="/components/footer/Icon-2.png" />
+                <img src="/my-portfolio/components/footer/Icon-2.png" />
               </a>
             </li>
             <li>
               <a href="/about" className="hover:underline">
-                <img src="/components/footer/Icon-3.png" />
+                <img src="/my-portfolio/components/footer/Icon-3.png" />
               </a>
             </li>
           </ul>

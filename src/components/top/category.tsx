@@ -3,29 +3,29 @@ import { Link } from "react-router-dom";
 export default function Category() {
   const categories = [
     {
-      src: "/components/common/category/カテゴリ1.png",
+      src: "/my-portfolio/components/common/category/カテゴリ1.png",
       label: "ソファ・チェア",
     },
     {
-      src: "/components/common/category/カテゴリ2.png",
+      src: "/my-portfolio/components/common/category/カテゴリ2.png",
       label: "テーブル",
     },
     {
-      src: "/components/common/category/カテゴリ3.png",
+      src: "/my-portfolio/components/common/category/カテゴリ3.png",
       label: "収納家具",
     },
-    { src: "/components/common/category/カテゴリ4.png", label: "ベッド" },
+    { src: "/my-portfolio/components/common/category/カテゴリ4.png", label: "ベッド" },
     {
-      src: "/components/common/category/カテゴリ5.png",
+      src: "/my-portfolio/components/common/category/カテゴリ5.png",
       label: "ラグ・カーペット",
     },
-    { src: "/components/common/category/カテゴリ6.png", label: "照明" },
+    { src: "/my-portfolio/components/common/category/カテゴリ6.png", label: "照明" },
     {
-      src: "/components/common/category/カテゴリ7.png",
+      src: "/my-portfolio/components/common/category/カテゴリ7.png",
       label: "カーテン",
     },
     {
-      src: "/components/common/category/カテゴリ8.png",
+      src: "/my-portfolio/components/common/category/カテゴリ8.png",
       label: "インテリア雑貨",
     },
   ];

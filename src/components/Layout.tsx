@@ -11,7 +11,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <Header />
       {!isTopPage && (
         <img
-          src="/components/header/header.png"
+          src="/my-portfolio/components/header/header.png"
           alt="ヘッダー画像"
           className="w-full h-auto object-cover"
         />

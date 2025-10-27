@@ -1,4 +1,4 @@
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
 import Top from "./pages/top";
 import Items from "./pages/items";
@@ -88,7 +88,7 @@ export default function App() {
   };
 
   return (
-    <Router>
+    <HashRouter>
       <ScrollToTop />
       <Layout>
         <Routes>
@@ -126,6 +126,6 @@ export default function App() {
           <Route path="/complete" element={<Complete />} />
         </Routes>
       </Layout>
-    </Router>
+    </HashRouter>
   );
 }
